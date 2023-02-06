@@ -1,4 +1,35 @@
 ---
-title: "Create an order"
-openapi: "POST /api/v1/order/"
+title: "Create order"
+openapi: "POST /api/v2/orders/"
 ---
+
+<ResponseExample>
+
+  ```json Response
+  {
+    "order_id": "O1234567",
+    "status": "pending",
+    "recipient": {
+      "first_name": "Alice",
+      "last_name": "Smith",
+      "email": "alice123@gmail.com",
+      "phone": "1234567890",
+      "address": {
+        "street1": "123 Main St",
+        "street2": "Apt 1",
+        "city": "San Francisco",
+        "state": "CA",
+        "country": "US",
+        "zip": "94105"
+      }
+    },
+    "kit_types": ["health_kit_1"],
+    "kits": [],
+    "created": "2023-01-01T04:30:11.222Z",
+    "updated": "2023-01-01T04:30:11.222Z",
+    "metadata": {
+      "some_key": "some_value"
+    }
+  }
+  ```
+</ResponseExample>

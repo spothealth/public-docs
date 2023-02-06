@@ -5,7 +5,7 @@
     "dark": "/logo.svg"
   },
   "api": {
-    "baseUrl": "https://api.spotdx.com"
+    "baseUrl": "https://spotdx.com"
   },
   "favicon": "/favicon.png",
   "colors": {
@@ -33,18 +33,48 @@
   "navigation": [
     {
       "group": "Welcome",
-      "pages": ["introduction"]
+      "pages": [
+        "docs/introduction",
+        "docs/whats-new"
+      ]
     },
     {
-      "group": "API Reference",
+      "group": "Guides",
       "pages": [
-        "reference/get-kits-list",
-        "reference/return-kit",
+        "docs/concepts",
+        "docs/sample-kit-lifecycle",
+        "docs/quickstart"
+      ]
+    },
+    {
+      "group": "API Reference - Orders",
+      "pages": [
         "reference/create-order",
-        "reference/get-order-list",
-        "reference/retrieve-order-2",
-        "reference/create-new-patient",
-        "reference/retrieve-order-1",
+        "reference/list-orders",
+        "reference/get-order",
+        "reference/update-order-metadata"
+      ]
+    },
+    {
+      "group": "API Reference - Kits",
+      "pages": [
+        "reference/list-kits",
+        "reference/get-kit",
+        "reference/list-kit-types"
+      ]
+    },
+    {
+      "group": "API Reference - Requisitions",
+      "pages": [
+        "docs/requisitions",
+        "reference/create-requisition",
+        "reference/list-requisitions",
+        "reference/get-requisition"
+      ]
+    },
+    {
+      "group": "API Reference - Other",
+      "pages": [
         "reference/generate-registration-token"
       ]
     }
