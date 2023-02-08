@@ -245,6 +245,15 @@
         "description": "Update the metadata associated with a kit.",
         "parameters": [
           {
+            "in": "path",
+            "name": "public_id",
+            "schema": {
+              "type": "string"
+            },
+            "description": "ID of the kit to update.",
+            "required": true
+          },
+          {
             "in": "body",
             "name": "metadata",
             "schema": {
