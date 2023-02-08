@@ -253,16 +253,25 @@
             "description": "ID of the kit to update.",
             "required": true
           },
-          {
-            "in": "body",
-            "name": "metadata",
-            "schema": {
-              "type": "string"
-            },
-            "description": "Metadata to be associated with the kit.",
-            "required": true
-          }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "metadata": {
+                    "type": "object",
+                    "description": "Metadata to be associated with the kit."
+                  }
+                },
+                "required": [
+                  "metadata"
+                ]
+              }
+            }
+          }
+        },
         "security": [
           {
             "tokenAuth": []
@@ -1021,7 +1030,9 @@
           "panels": {
             "type": "array",
             "description": "The panel codes of the test being performed on the sample. We'll create these with you during onboarding.",
-            "example": ["PANEL-123"],
+            "example": [
+              "PANEL-123"
+            ],
             "items": {
               "type": "string"
             }
@@ -1299,7 +1310,9 @@
               "panels": {
                 "type": "array",
                 "description": "The panel codes of the test being performed on the sample. We'll create these with you during onboarding.",
-                "example": ["PANEL-123"],
+                "example": [
+                  "PANEL-123"
+                ],
                 "items": {
                   "type": "string"
                 }
@@ -1741,7 +1754,9 @@
           "panels": {
             "type": "array",
             "description": "The panel codes of the test being performed on the sample. We'll create these with you during onboarding.",
-            "example": ["PANEL-123"],
+            "example": [
+              "PANEL-123"
+            ],
             "items": {
               "type": "string"
             }
@@ -1896,7 +1911,9 @@
           "panels": {
             "type": "array",
             "description": "The panel codes of the test being performed on the sample. We'll create these with you during onboarding.",
-            "example": ["PANEL-123"],
+            "example": [
+              "PANEL-123"
+            ],
             "items": {
               "type": "string"
             }
