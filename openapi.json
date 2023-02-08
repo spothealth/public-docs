@@ -239,6 +239,58 @@
             "description": "Not found"
           }
         }
+      },
+      "post": {
+        "operationId": "api_v2_update_kit_metadata",
+        "description": "Update the metadata associated with a kit.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "metadata",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Metadata to be associated with the kit.",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Kit"
+                }
+              }
+            }
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            },
+            "description": "Bad request"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            },
+            "description": "Not found"
+          }
+        }
       }
     },
     "/api/v2/orders/": {
@@ -678,7 +730,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Requisition"
+                    "$ref": "#/components/schemas/RequisitionSummary"
                   }
                 }
               }
@@ -957,10 +1009,13 @@
             "description": "The barcode of the sample mailed to the lab. We use this to identify the sample from the lab report.",
             "example": "19742938328"
           },
-          "panel_code": {
-            "type": "string",
-            "description": "The panel code of the test being performed on the sample. We'll create these with you during onboarding.",
-            "example": "PANEL-123"
+          "panels": {
+            "type": "array",
+            "description": "The panel codes of the test being performed on the sample. We'll create these with you during onboarding.",
+            "example": ["PANEL-123"],
+            "items": {
+              "type": "string"
+            }
           },
           "account_number": {
             "type": "string",
@@ -1085,7 +1140,7 @@
         },
         "required": [
           "barcode",
-          "panel_code",
+          "panels",
           "account_number",
           "lab",
           "state_collected",
@@ -1232,9 +1287,13 @@
                   "$ref": "#/components/schemas/Shipment"
                 }
               },
-              "panel": {
-                "type": "string",
-                "example": "lipids_panel_complete"
+              "panels": {
+                "type": "array",
+                "description": "The panel codes of the test being performed on the sample. We'll create these with you during onboarding.",
+                "example": ["PANEL-123"],
+                "items": {
+                  "type": "string"
+                }
               },
               "reports": {
                 "type": "array",
@@ -1669,10 +1728,13 @@
             "description": "The name of the lab that will process the sample.",
             "example": "CRL"
           },
-          "panel_code": {
-            "type": "string",
-            "description": "The code of the panel being tested on the sample.",
-            "example": "PANEL-123"
+          "panels": {
+            "type": "array",
+            "description": "The panel codes of the test being performed on the sample. We'll create these with you during onboarding.",
+            "example": ["PANEL-123"],
+            "items": {
+              "type": "string"
+            }
           },
           "state_collected": {
             "type": "string",
@@ -1795,6 +1857,69 @@
             "example": {
               "some_key": "some_value"
             }
+          }
+        }
+      },
+      "RequisitionSummary": {
+        "type": "object",
+        "properties": {
+          "requisition_id": {
+            "type": "string",
+            "description": "The ID of the requisition.",
+            "example": "f0e5a607-5b52-4d7c-a3f2-c40772d41482"
+          },
+          "barcode": {
+            "type": "string",
+            "description": "The full barcode of the sample mailed to the lab. Must be globally unique.",
+            "example": "19742938328"
+          },
+          "account_number": {
+            "type": "string",
+            "description": "The account number submitted to the lab.",
+            "example": "1234567890"
+          },
+          "lab": {
+            "type": "string",
+            "description": "The name of the lab that will process the sample.",
+            "example": "CRL"
+          },
+          "panels": {
+            "type": "array",
+            "description": "The panel codes of the test being performed on the sample. We'll create these with you during onboarding.",
+            "example": ["PANEL-123"],
+            "items": {
+              "type": "string"
+            }
+          },
+          "patient": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Patient"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "$ref": "#/components/schemas/Address"
+                  }
+                }
+              }
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "created",
+              "approved",
+              "denied",
+              "delivered",
+              "received",
+              "extra_quality_checks",
+              "resulted",
+              "rejected",
+              "delivery_exception"
+            ],
+            "example": "resulted"
           }
         }
       },
