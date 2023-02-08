@@ -2,3 +2,21 @@
 title: "Generate registration token"
 openapi: "POST /api/v2/tokens/patient_registration/"
 ---
+
+<Tip>
+  This endpoint is only needed if you want to use your own authentication system to manage kit registration. It's
+  not needed in most cases. Speak to us if you want to build your registration flow this way.
+</Tip>
+
+This endpoint generates a one-time-use token that can be passed to your kit registration page to allow for a more
+convenient registration process for repeat patients. This token is patient-specific. “patient_id” is Spot’s unique
+identifier for a patient. It is returned by any of our api endpoints that supply patient information, such as
+sample and order retrieval.
+
+<ResponseExample>
+  ```json Response
+  {
+    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtYXgiOjEsInN1YiI6InBhdGllbnRfcmVnaXN0cmF0aW9uIiwibW9kIjoibiIsImp0aSI6MzYsImV4cCI6MTY2MTg4NjgzOCwiaWF0IjoxNjYxODg2MjM4fQ.byD8FThgvNGm3csx_QzrpZQUrsfFW3rmBU3mLQQlL2I"
+  }
+  ```
+</ResponseExample>

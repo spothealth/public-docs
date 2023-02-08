@@ -1577,7 +1577,8 @@
         "properties": {
           "token": {
             "type": "string",
-            "readOnly": true
+            "readOnly": true,
+            "example": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJtYXgiOjEsInN1YiI6InBhdGllbnRfcmVnaXN0cmF0aW9uIiwibW9kIjoibiIsImp0aSI6MzYsImV4cCI6MTY2MTg4NjgzOCwiaWF0IjoxNjYxODg2MjM4fQ.byD8FThgvNGm3csx_QzrpZQUrsfFW3rmBU3mLQQlL2I"
           }
         },
         "required": [
