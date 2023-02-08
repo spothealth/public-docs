@@ -252,7 +252,7 @@
             },
             "description": "ID of the kit to update.",
             "required": true
-          },
+          }
         ],
         "requestBody": {
           "content": {
