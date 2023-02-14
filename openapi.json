@@ -952,6 +952,7 @@
                   "not_found",
                   "unauthorized",
                   "forbidden",
+                  "rate_limit_exceeded",
                   "internal_server_error"
                 ]
               },
