@@ -1118,40 +1118,8 @@
                 "format": "date",
                 "description": "The date of birth of the patient to be created."
               },
-              "street1": {
-                "type": "string",
-                "description": "Recipient's address.",
-                "example": "123 Main St"
-              },
-              "street2": {
-                "description": "Second line of recipient's address.",
-                "type": "string",
-                "nullable": true,
-                "example": "Apt 1"
-              },
-              "city": {
-                "type": "string",
-                "description": "Recipient's city of residence.",
-                "example": "San Francisco"
-              },
-              "state": {
-                "type": "string",
-                "description": "Recipient's state of residence.",
-                "example": "CA"
-              },
-              "country": {
-                "type": "string",
-                "description": "Recipient's country of residence.",
-                "enum": [
-                  "US",
-                  "CA"
-                ],
-                "example": "US"
-              },
-              "zip": {
-                "type": "string",
-                "description": "Recipient's zip code.",
-                "example": "94105"
+              "address": {
+                "$ref": "#/components/schemas/Address"
               }
             }
           },
