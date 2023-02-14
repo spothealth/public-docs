@@ -931,8 +931,35 @@
         "type": "object",
         "properties": {
           "error": {
-            "type": "string",
-            "readOnly": true
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "number",
+                "example": 400,
+                "enum": [
+                  400,
+                  401,
+                  403,
+                  404,
+                  500
+                ]
+              },
+              "type": {
+                "type": "string",
+                "example": "bad_request",
+                "enum": [
+                  "bad_request",
+                  "not_found",
+                  "unauthorized",
+                  "forbidden",
+                  "internal_server_error"
+                ]
+              },
+              "detail": {
+                "type": "string",
+                "example": "The first_name field is required"
+              }
+            }
           }
         },
         "required": [
