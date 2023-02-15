@@ -364,25 +364,6 @@
           },
           {
             "in": "query",
-            "name": "results",
-            "description": "Number of results to return. Must be in range 1-100. Default is 10.",
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "maximum": 100
-            }
-          },
-          {
-            "in": "query",
-            "name": "offset",
-            "description": "The initial index from which to return the results.",
-            "schema": {
-              "type": "integer",
-              "minimum": 0
-            }
-          },
-          {
-            "in": "query",
             "name": "created_before",
             "schema": {
               "type": "string"
@@ -412,6 +393,25 @@
               "type": "string"
             },
             "description": "Only retrieve orders updated on or after this date. Format: YYYY-MM-DD"
+          },
+          {
+            "in": "query",
+            "name": "results",
+            "description": "Number of results to return. Must be in range 1-100. Default is 10.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "in": "query",
+            "name": "offset",
+            "description": "The initial index from which to return the results.",
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
           }
         ],
         "security": [
@@ -718,6 +718,38 @@
               "type": "string"
             },
             "description": "Filter by status."
+          },
+          {
+            "in": "query",
+            "name": "created_before",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Only retrieve orders created on or before this date. Format: YYYY-MM-DD"
+          },
+          {
+            "in": "query",
+            "name": "created_after",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Only retrieve orders created on or after this date. Format: YYYY-MM-DD"
+          },
+          {
+            "in": "query",
+            "name": "updated_before",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Only retrieve orders updated on or before this date. Format: YYYY-MM-DD"
+          },
+          {
+            "in": "query",
+            "name": "updated_after",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Only retrieve orders updated on or after this date. Format: YYYY-MM-DD"
           },
           {
             "in": "query",
@@ -1763,11 +1795,44 @@
             "example": "OH"
           },
           "patient": {
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Patient"
+            "type": "object",
+            "properties": {
+              "first_name": {
+                "type": "string",
+                "description": "The first name of the patient.",
+                "example": "Alice"
               },
-              {
+              "last_name": {
+                "type": "string",
+                "description": "The last name of the patient to be created.",
+                "example": "Smith"
+              },
+              "email": {
+                "type": "string",
+                "format": "email",
+                "description": "The email of the patient to be created.",
+                "example": "alice123@gmail.com"
+              },
+              "phone": {
+                "type": "string",
+                "description": "Optional phone number of the patient.",
+                "example": "1234567890"
+              },
+              "sex": {
+                "type": "string",
+                "description": "The biological sex of the patient to be created.",
+                "enum": [
+                  "M",
+                  "F"
+                ],
+                "example": "F"
+              },
+              "date_of_birth": {
+                "type": "string",
+                "format": "date",
+                "description": "The date of birth of the patient to be created."
+              },
+              "address": {
                 "type": "object",
                 "properties": {
                   "address": {
@@ -1775,7 +1840,7 @@
                   }
                 }
               }
-            ]
+            }
           },
           "tracking": {
             "type": "object",
@@ -1878,6 +1943,16 @@
             "example": {
               "some_key": "some_value"
             }
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-01T00:00:00Z"
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-01T00:00:00Z"
           }
         }
       },
@@ -1943,6 +2018,16 @@
               "delivery_exception"
             ],
             "example": "resulted"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-01T00:00:00Z"
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2020-01-01T00:00:00Z"
           }
         }
       },
