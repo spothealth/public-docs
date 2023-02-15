@@ -1,0 +1,15 @@
+---
+title: "Authentication"
+description: "Learn how to authenticate your requests with the Spot API"
+---
+
+During onboarding, each your team members will be supplied their own API key. This key should be supplied in the header
+under the `Authorization` key for each request. Unauthenticated requests, or those with an invalid API key, will be
+rejected with a `401 Unauthorized` response. The API key should be prefixed with `Token` and a space to identify it
+as an API token. For example:
+
+```
+{
+  "Authorization": "Token API_KEY_HERE"
+}
+```
