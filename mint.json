@@ -39,19 +39,30 @@
       ]
     },
     {
-      "group": "Guides",
+      "group": "Basic Guides",
       "pages": [
-        "docs/concepts",
-        "docs/sample-kit-lifecycle",
-        "docs/authentication",
         "docs/quickstart",
-        "docs/errors"
+        "docs/concepts",
+        "docs/sample-kit-lifecycle"
+      ]
+    },
+    {
+      "group": "Advanced Guides",
+      "pages": [
+        "docs/advanced-kit-workflows",
       ]
     },
     {
       "group": "Integrations",
       "pages": [
         "docs/integrations"
+      ]
+    },
+    {
+      "group": "Spot API",
+      "pages": [
+        "docs/authentication",
+        "docs/errors"
       ]
     },
     {
