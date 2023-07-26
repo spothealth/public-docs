@@ -1073,7 +1073,12 @@
           "patient_id": {
             "type": "string",
             "description": "UUID of the patient."
-          }
+          },
+          "kit_type": {
+            "type": "string",
+            "description": "If this is a multi-purpose kit, optionally specify the kit type it should become.",
+            "example": "health_kit_1"
+          },
         },
         "required": [
           "patient_id"

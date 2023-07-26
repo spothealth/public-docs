@@ -49,6 +49,12 @@
       ]
     },
     {
+      "group": "Integrations",
+      "pages": [
+        "docs/integrations"
+      ]
+    },
+    {
       "group": "API Reference - Orders",
       "pages": [
         "reference/create-order",

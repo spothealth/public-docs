@@ -1,0 +1,162 @@
+---
+title: "Ecommerce Integrations"
+description: "Learn how to link your ecommerce store to your Spot account to automatically fulfil orders."
+---
+
+# Ecommerce Integrations
+
+Spot integrates with every major ecommerce platform to automatically fulfil orders from your store. Currently we
+integrate with the following platforms:
+
+ * Shopify
+ * WooCommerce
+ * Wix
+
+But we're always adding more. If you don't see your platform listed, talk to us and we'll build it.
+
+#### Before you start
+
+Before you can start integrating your ecommerce platform with Spot, you'll need to have an API key and have
+finalised your panels. You'll be provided with your Spot kit type IDs and access to the client portal as part of our
+standard onboarding process. To find your API key, log in to your Spot client portal, click your profile icon in the
+top right corner, and select "Account Settings".
+
+## Shopify Integration Guide
+
+Administering your Shopify integration can be done entirely from within the Spot management portal.
+
+1. To get started, log in at https://app.spotdx.com/manage and select Ecommerce in the sidebar. If you don't have one
+already, create a new ecommerce integration by clicking the plus button in the top right corner. Within this interface
+you can add and remove SKUs, and map them to Spot kit types. Use the inline creation form to set up your SKU mappings.
+2. Once you've created your ecommerce integration, copy the webhook URL provided in the main Ecommerce integrations
+table. This is the URL that Shopify will use to notify Spot when an order is placed.
+3. In your Shopify admin panel, select "Settings" from the bottom left corner, then "Notifications" from the submenu
+that appears.
+4. Scroll down to the "Webhooks" section and click "Create webhook".
+5. Paste the webhook URL you copied from the Spot management portal into the "URL" field.
+6. In the "Event" dropdown, select "Order payment".
+7. Click save.
+8. Make sure your Shopify checkout page requires an email address. Set the required customer contact information to
+"Email address only" in your Shopify admin panel by selecting "Settings" from the bottom left corner, then "Checkout"
+from the submenu that appears.
+9. Place a test order manually and let us know so we can confirm the integration has been installed correctly.
+
+
+## WooCommerce Integration Guide
+
+<Tip>
+  If you're using custom plugins that modify WooCommerce's behaviour, Spot's standard integration may not work without
+  some customisation.
+</Tip>
+
+1. In the script provided below, replace the API key with your live API key. This can be found by logging into the Spot management portal at https://app.spotdx.com/manage under "tokens" in the sidebar.
+2. Replace the WooCommerce SKU mapping with the Spot kit type SKUs you'd like them to map to. The left side is the SKU in your Woocommerce configuration, and the right side is an array of Spot kit types whose IDs will have been provided to you during onboarding.
+3. Log into your Wordpress admin panel.
+4. In the left sidebar, select "appearance" and then "theme file editor" from the submenu that appears in the sidebar.
+5. On the right side of your screen, under "theme files", select "functions.php"
+6. Paste the whole script as it appears at the top of the file, then save.
+7. Ensure that your Woocommerce checkout page requires a first name, last name, street address, city, state, email address, and ZIP code. These are required fields to order kits via the Spot API.
+8. Place a test order manually and let us know so we can confirm the integration has been installed correctly.
+
+```php
+<?php
+/**
+* Spot Integration
+*/
+add_action("woocommerce_thankyou", "send_to_spot");
+
+function send_to_spot($order_id)
+{
+    $spot_order_id = get_post_meta($order_id, 'spot_order_id', true);
+    if (!empty($spot_order_id)) {
+        return;
+    }
+
+    // Credentials
+    $SPOT_API_TOKEN = "INSERT_YOUR_API_KEY_HERE";
+
+    // Lookup table mapping customer SKUs -> Spot SKUs
+    $customer_to_spot_sku_mapping = [
+        "example_woocommerce_sku" => ["insert_spot_kit_type_here"],
+        "example_woocommerce_bundle" => ["insert_spot_kit_type_here", "insert_spot_kit_type_here"],
+    ];
+
+    $order = wc_get_order($order_id);
+
+    // Loop through each item in the order to see what should be fulfilled by Spot
+    $kits_for_spot_to_fulfill = [];
+
+    foreach ($order->get_items() as $item) {
+        $sku = $item->get_product()->get_sku();
+
+        if (array_key_exists($sku, $customer_to_spot_sku_mapping)) {
+            $mapping_value = $customer_to_spot_sku_mapping[$sku];
+
+            for ($i = 0; $i < $item->get_quantity(); $i++) {
+                foreach ($mapping_value as $kit_type) {
+                    $kits_for_spot_to_fulfill[] = $kit_type;
+                }
+            }
+        }
+    }
+
+    // If there's nothing for Spot to fulfill, then skip.
+    if (empty($kits_for_spot_to_fulfill)) {
+        // No data is sent to Spot
+        return;
+    }
+
+    // Map details from WooCommerce to Spot's API format
+    $spot_order = [
+        "recipient" => [
+            "first_name" => $order->get_shipping_first_name(),
+            "last_name" => $order->get_shipping_last_name(),
+            "address" => [
+                "street1" => $order->get_shipping_address_1(),
+                "street2" => $order->get_shipping_address_2(),
+                "city" => $order->get_shipping_city(),
+                "state" => $order->get_shipping_state(),
+                "zip" => $order->get_shipping_postcode(),
+            ],
+            "email" => $order->get_billing_email(),
+            "phone" => $order->get_billing_phone(),
+        ],
+        "kit_types" => $kits_for_spot_to_fulfill,
+    ];
+
+    // Send to Spot
+    $ch = curl_init("https://app.spotdx.com/api/v1/order/");
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($spot_order));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+        "Content-Type: application/json",
+        "Authorization: Token $SPOT_API_TOKEN",
+    ]);
+
+    $result = curl_exec($ch);
+    $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    if ($status_code === 201 || $status_code === 200) {
+        // Successful response
+        $spot_order_id = json_decode($result, true)['order_id'];
+        add_post_meta($order_id, 'spot_order_id', $spot_order_id);
+        // $order->update_status('completed');
+    } else {
+        // Handle unsuccessful response
+        $to = "stuart@spotdx.com";
+        $subject = "Error: Spot API Request Failed";
+        $message = "Order ID: $order_id\nData Sent: " . json_encode($spot_order) . "\nResponse Code: $status_code\nResponse Body: $result";
+        wp_mail($to, $subject, $message);
+    }
+
+    curl_close($ch);
+}
+?>
+```
+
+## Squarespace Integration Guide
+
+We can set up a custom endpoint for your Squarespace store to receive webhooks. Talk to us.
+
+
