@@ -50,6 +50,7 @@
       "group": "Advanced Guides",
       "pages": [
         "docs/advanced-kit-workflows",
+        "docs/requisitions"
       ]
     },
     {
@@ -85,7 +86,6 @@
     {
       "group": "API Reference - Requisitions",
       "pages": [
-        "docs/requisitions",
         "reference/create-requisition",
         "reference/list-requisitions",
         "reference/get-requisition"

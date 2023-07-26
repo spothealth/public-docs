@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5704e39a-f293-4deb-9ec9-df32848af581" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/docs/advanced-kit-workflows.mdx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/integrations.mdx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/patient-registration-token.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/patient-registration-token.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/requisitions.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/docs/requisitions.mdx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mint.json" beforeDir="false" afterPath="$PROJECT_DIR$/mint.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/openapi.json" beforeDir="false" afterPath="$PROJECT_DIR$/openapi.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +92,7 @@
       <workItem from="1680262202770" duration="272000" />
       <workItem from="1680457326428" duration="424000" />
       <workItem from="1689875644704" duration="302000" />
-      <workItem from="1690365539575" duration="2087000" />
+      <workItem from="1690365539575" duration="2472000" />
     </task>
     <servers />
   </component>
