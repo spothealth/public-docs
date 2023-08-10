@@ -155,7 +155,7 @@
         }
       }
     },
-    "/api/v2/kits/types": {
+    "/api/v2/kit_types": {
       "get": {
         "operationId": "api_v2_list_kit_types",
         "description": "Get an array of all valid kit types that can be created.",
@@ -885,6 +885,122 @@
           }
         }
       }
+    },
+    "/api/v2/patients/": {
+      "get": {
+        "operationId": "api_v2_list_patients",
+        "description": "Retrieve a requisition.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "The ID of the requisition to retrieve.",
+            "required": true
+          }
+        ],
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Requisition"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            },
+            "description": ""
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "operationId": "api_v2_create_patient",
+        "description": "Create a patient.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePatient"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePatient"
+              }
+            },
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePatient"
+              }
+            }
+          },
+          "required": true
+        },
+        "security": [
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Patient"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            },
+            "description": ""
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            },
+            "description": ""
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1072,13 +1188,13 @@
         "properties": {
           "patient_id": {
             "type": "string",
-            "description": "UUID of the patient."
+            "description": "UUID of a patient you've already created."
           },
           "kit_type": {
             "type": "string",
-            "description": "If this is a multi-purpose kit, optionally specify the kit type it should become.",
+            "description": "If this is a multi-purpose kit, optionally specify the kit type it should become. For more information about multi-purpose kits, read the advanced kit workflows guide.",
             "example": "health_kit_1"
-          },
+          }
         },
         "required": [
           "patient_id"
