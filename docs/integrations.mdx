@@ -27,19 +27,23 @@ Administering your Shopify integration can be done entirely from within the Spot
 
 1. To get started, log in at https://app.spotdx.com/manage and select Ecommerce in the sidebar. If you don't have one
 already, create a new ecommerce integration by clicking the plus button in the top right corner. Within this interface
-you can add and remove SKUs, and map them to Spot kit types. Use the inline creation form to set up your SKU mappings.
-2. Once you've created your ecommerce integration, copy the webhook URL provided in the main Ecommerce integrations
+you can add and remove SKUs, and map them to Spot kit types.
+2. At the bottom of the form you'll see an empty list of SKU mappings. These are used to connect your Shopify products
+to kit types in Spot. Fill in the SKU field with the SKU of the product in Shopify, and use the dropdown to select the
+kit type in Spot that you'd like to map it to. You can add as many mappings as you like. Your Shopify SKUs don't need
+to be the same as your Spot kit type SKUs.
+3. Once you've created your ecommerce integration, copy the webhook URL provided in the main Ecommerce integrations
 table. This is the URL that Shopify will use to notify Spot when an order is placed.
-3. In your Shopify admin panel, select "Settings" from the bottom left corner, then "Notifications" from the submenu
+4. In your Shopify admin panel, select "Settings" from the bottom left corner, then "Notifications" from the submenu
 that appears.
-4. Scroll down to the "Webhooks" section and click "Create webhook".
-5. Paste the webhook URL you copied from the Spot management portal into the "URL" field.
-6. In the "Event" dropdown, select "Order payment".
-7. Click save.
-8. Make sure your Shopify checkout page requires an email address. Set the required customer contact information to
+5. Scroll down to the "Webhooks" section and click "Create webhook".
+6. Paste the webhook URL you copied from the Spot management portal into the "URL" field.
+7. In the "Event" dropdown, select "Order payment".
+8. Click save.
+9. Make sure your Shopify checkout page requires an email address. Set the required customer contact information to
 "Email address only" in your Shopify admin panel by selecting "Settings" from the bottom left corner, then "Checkout"
 from the submenu that appears.
-9. Place a test order manually and let us know so we can confirm the integration has been installed correctly.
+10. Place a test order manually and let us know so we can confirm the integration has been installed correctly.
 
 
 ## WooCommerce Integration Guide
