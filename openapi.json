@@ -1310,6 +1310,9 @@
                 "maxLength": 10,
                 "example": "1234567890"
               }
+            },
+            "example": {
+              "crl_slip_id": "1234567890"
             }
           },
           "metadata": {
@@ -2084,7 +2087,9 @@
                 "example": "1234567890"
               }
             },
-            "example": {}
+            "example": {
+              "crl_slip_id": "1234567890"
+            }
           },
           "metadata": {
             "type": "object",
