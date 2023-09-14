@@ -1298,6 +1298,20 @@
               "carrier": "usps"
             }
           },
+          "attributes": {
+            "type": "object",
+            "nullable": true,
+            "description": "An optional set of values that can be passed through to specific labs.",
+            "properties": {
+              "crl_slip_id": {
+                "type": "string",
+                "nullable": true,
+                "description": "The slip ID to be passed through with the requisition if placing a requisition at CRL. Must be alphanumeric and maximum 10 characters.",
+                "maxLength": 10,
+                "example": "1234567890"
+              }
+            }
+          },
           "metadata": {
             "type": "object",
             "nullable": true,
@@ -2056,6 +2070,21 @@
             "items": {
               "$ref": "#/components/schemas/Report"
             }
+          },
+          "attributes": {
+            "type": "object",
+            "nullable": true,
+            "description": "An optional set of values that can be passed through to specific labs.",
+            "properties": {
+              "crl_slip_id": {
+                "type": "string",
+                "nullable": true,
+                "description": "The slip ID to be passed through with the requisition if placing a requisition at CRL. Must be alphanumeric and maximum 10 characters.",
+                "maxLength": 10,
+                "example": "1234567890"
+              }
+            },
+            "example": {}
           },
           "metadata": {
             "type": "object",
