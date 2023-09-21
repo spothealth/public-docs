@@ -2081,14 +2081,25 @@
             "properties": {
               "crl_slip_id": {
                 "type": "string",
+                "required": false,
                 "nullable": true,
                 "description": "The slip ID to be passed through with the requisition if placing a requisition at CRL. Must be alphanumeric and maximum 10 characters.",
                 "maxLength": 10,
                 "example": "1234567890"
+              },
+              "crl_tier3_account_number": {
+                "type": "string",
+                "required": false,
+                "nullable": true,
+                "description": "The region ID to be passed through with the requisition if placing a requisition at CRL. Must be alphanumeric and exactly 8 characters.",
+                "maxLength": 8,
+                "minLength": 8,
+                "example": "12345678"
               }
             },
             "example": {
-              "crl_slip_id": "1234567890"
+              "crl_slip_id": "1234567890",
+              "crl_tier3_account_number": "12345678"
             }
           },
           "metadata": {
