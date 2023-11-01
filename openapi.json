@@ -1887,6 +1887,10 @@
             "type": "string",
             "format": "date-time"
           },
+          "date_resulted": {
+            "type": "string",
+            "format": "date-time"
+          },
           "is_amendment": {
             "type": "boolean",
             "description": "Whether this report is an amendment to a previous report.",
