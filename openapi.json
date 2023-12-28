@@ -681,6 +681,14 @@
         "parameters": [
           {
             "in": "query",
+            "name": "lab",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by the lab name. This is case sensitive. If there is a space in the lab's name, use %20 in the url instead, eg. The Lab would become ?lab=The%20Lab"
+          },
+          {
+            "in": "query",
             "name": "first_name",
             "schema": {
               "type": "string"
