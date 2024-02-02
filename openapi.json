@@ -1013,7 +1013,7 @@
     "/api/v3/kits/{public_id}/activate/": {
       "post": {
         "operationId": "api_v3_kits_activate_create",
-        "description": "Activate a kit by either providing 'patient_id' or the information needed to create a new patient.",
+        "description": "Activate a kit via API by either providing 'patient_id' or the information needed to create a new patient. Please note that the activation API is only available for selected kits.",
         "parameters": [
           {
             "in": "path",
