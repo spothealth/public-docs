@@ -1009,6 +1009,148 @@
           }
         }
       }
+    },
+    "/api/v3/kits/{public_id}/activate/": {
+      "post": {
+        "operationId": "api_v3_kits_activate_create",
+        "description": "Activate a kit by either providing 'patient_id' or the information needed to create a new patient.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "public_id",
+            "schema": {
+              "type": "string"
+            },
+            "required": true
+          },
+          {
+            "in": "query",
+            "name": "public_id",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Public ID of the kit",
+            "required": true
+          }
+        ],
+        "tags": [
+          "api"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "patient_id": {
+                    "type": "string",
+                    "description": "ID of the existing patient. If provided, no other patient details are needed."
+                  },
+                  "first_name": {
+                    "type": "string"
+                  },
+                  "last_name": {
+                    "type": "string"
+                  },
+                  "date_of_birth": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "sex": {
+                    "type": "string"
+                  },
+                  "street1": {
+                    "type": "string"
+                  },
+                  "street2": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "type": "string"
+                  },
+                  "zip": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "phone": {
+                    "type": "string"
+                  },
+                  "research_consent": {
+                    "type": "boolean"
+                  }
+                },
+                "description": "Provide 'patient_id' to activate the kit for an existing patient, or provide patient details to create a new patient. Individual field requirements depend on the kit type being activated. Please note that the activation API is only available for selected kits."
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "tokenAuth": []
+          },
+          {}
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "result": {
+                          "type": "string",
+                          "example": "success"
+                        }
+                      }
+                    }
+                  },
+                  "description": "Unspecified response body"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequest"
+                }
+              }
+            },
+            "description": "Bad request"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Forbidden"
+                }
+              }
+            },
+            "description": "Not found"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFound"
+                }
+              }
+            },
+            "description": "Not found"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1339,6 +1481,46 @@
           "lab",
           "state_collected",
           "patient"
+        ]
+      },
+      "Forbidden": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "number",
+                "example": 403,
+                "enum": [
+                  400,
+                  401,
+                  403,
+                  404,
+                  500
+                ]
+              },
+              "type": {
+                "type": "string",
+                "example": "forbidden",
+                "enum": [
+                  "bad_request",
+                  "not_found",
+                  "unauthorized",
+                  "forbidden",
+                  "rate_limit_exceeded",
+                  "internal_server_error"
+                ]
+              },
+              "detail": {
+                "type": "string",
+                "example": "At-home testing is not available to residents of New York state"
+              }
+            }
+          }
+        },
+        "required": [
+          "error"
         ]
       },
       "Kit": {
