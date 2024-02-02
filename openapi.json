@@ -2275,7 +2275,6 @@
             "properties": {
               "crl_slip_id": {
                 "type": "string",
-                "required": false,
                 "nullable": true,
                 "description": "The slip ID to be passed through with the requisition if placing a requisition at CRL. Must be alphanumeric and maximum 10 characters.",
                 "maxLength": 10,
@@ -2283,7 +2282,6 @@
               },
               "crl_tier3_account_number": {
                 "type": "string",
-                "required": false,
                 "nullable": true,
                 "description": "The region ID to be passed through with the requisition if placing a requisition at CRL. Must be alphanumeric and exactly 8 characters.",
                 "maxLength": 8,
