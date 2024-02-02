@@ -1753,8 +1753,36 @@
         "type": "object",
         "properties": {
           "error": {
-            "type": "string",
-            "readOnly": true
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "number",
+                "example": 404,
+                "enum": [
+                  400,
+                  401,
+                  403,
+                  404,
+                  500
+                ]
+              },
+              "type": {
+                "type": "string",
+                "example": "forbidden",
+                "enum": [
+                  "bad_request",
+                  "not_found",
+                  "unauthorized",
+                  "forbidden",
+                  "rate_limit_exceeded",
+                  "internal_server_error"
+                ]
+              },
+              "detail": {
+                "type": "string",
+                "example": "Kit id SPOTZZZZZZ not found"
+              }
+            }
           }
         },
         "required": [
