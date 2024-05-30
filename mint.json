@@ -73,7 +73,7 @@
       "group": "API Reference - Kits",
       "pages": [
         "reference/list-kits",
-        "reference/get-kit",
+        "reference/get-kit"
       ]
     },
     {
