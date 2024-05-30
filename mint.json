@@ -35,7 +35,8 @@
       "group": "Welcome",
       "pages": [
         "docs/introduction",
-        "docs/whats-new"
+        "docs/authentication",
+        "docs/errors"
       ]
     },
     {
@@ -57,13 +58,6 @@
       "group": "Integrations",
       "pages": [
         "docs/integrations"
-      ]
-    },
-    {
-      "group": "Spot API",
-      "pages": [
-        "docs/authentication",
-        "docs/errors"
       ]
     },
     {
